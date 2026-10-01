@@ -26,3 +26,10 @@ Configuration files and logs are full of offsets written by humans in inconsiste
 - `+24:00` is rejected even though ISO 8601 permits it. Python's `timedelta` would silently normalise it to the next day, which is almost never what the caller means.
 - Bare `Z` and bare `UTC` (no offset) are **rejected**. The function is called `parse_utc_offset`; if you want UTC, pass `timezone.utc` directly. Silently returning UTC for missing input hides bugs.
 - The returned `timezone` carries the original input string as its `tzname`, so it round-trips in logs.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
