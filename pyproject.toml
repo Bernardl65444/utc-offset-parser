@@ -1,6 +1,6 @@
 [project]
 name = "utc-offset-parser"
-version = "0.1.0"
+version = "0.1.1"
 description = "Parses human-written UTC offsets like 'GMT-5', '+0530', 'UTC+02:00' into timezone objects."
 requires-python = ">=3.10"
 dependencies = []
